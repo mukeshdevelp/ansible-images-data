@@ -44,7 +44,8 @@ final result on host-
   
   
   ansible dbservers -b -m user -a "name=devops3 uid=2005 group=devops-team shell=/bin/zsh"
-  
+  <img width="1363" height="335" alt="zsh shell" src="https://github.com/user-attachments/assets/04523eed-5923-4073-b4ed-f85a252b0ce0" />
+
   # Admin Team
   ansible dbservers -b -m user -a "name=admin1 uid=2006 group=admin-group shell=/bin/sh"
 
@@ -53,6 +54,7 @@ final result on host-
   
   
   ansible dbservers -b -m user -a "name=admin3 uid=2008 group=admin-group shell=/bin/sh"
+  <img width="1289" height="278" alt="admin shell" src="https://github.com/user-attachments/assets/a443466e-465b-410e-9aa3-b22069478d66" />
 
 ## Setting password expiry policies..."
   for user in devuser1 devuser2 devuser3 devops1 devops2 devops3 admin1 admin2 admin3; do
