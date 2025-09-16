@@ -6,7 +6,7 @@
 
 
 # creating groups - 
-# cmd -
+
 ansible dbservers -b -m group -a "name=dev-team state=present"
 <img width="761" height="221" alt="image" src="https://github.com/user-attachments/assets/2b48d679-d7ca-446d-b6c2-b6664026bc4f" />
 
@@ -35,6 +35,8 @@ ansible dbservers -b -m user -a "name=devops1 uid=2003 group=devops-team shell=/
 <img width="1173" height="244" alt="user3" src="https://github.com/user-attachments/assets/42025891-fdb9-401e-b9ad-b30a70e2cbf5" />
 
 ansible dbservers -b -m user -a "name=devops2 uid=2004 group=devops-team shell=/bin/zsh"
+
+
 ansible dbservers -b -m user -a "name=devops3 uid=2005 group=devops-team shell=/bin/zsh"
 
 # Admin Team
@@ -42,7 +44,7 @@ ansible dbservers -b -m user -a "name=admin1 uid=2006 group=admin-group shell=/b
 ansible dbservers -b -m user -a "name=admin2 uid=2007 group=admin-group shell=/bin/sh"
 ansible dbservers -b -m user -a "name=admin3 uid=2008 group=admin-group shell=/bin/sh"
 
-echo "==> Setting password expiry policies..."
+## Setting password expiry policies..."
 for user in devuser1 devuser2 devuser3 devops1 devops2 devops3 admin1 admin2 admin3; do
   ansible dbservers -b -m command -a "chage -M 60 -m 7 -W 10 $user"
 done
@@ -65,6 +67,7 @@ ansible dbservers -b -m file -a "path=/shared_resources state=directory mode=277
 ansible dbservers -b -m file -a "path=/archive state=directory mode=0555"
 
 echo "==> Creating admin-only area..."
+
 ansible dbservers -b -m file -a "path=/admin_area state=directory owner=root group=admin-group mode=0770"
 
 echo "==> Setting ACLs for user home directories (read-only for their teams)..."
