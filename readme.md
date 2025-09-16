@@ -58,7 +58,8 @@ final result on host-
   for user in devuser1 devuser2 devuser3 devops1 devops2 devops3 admin1 admin2 admin3; do
     ansible dbservers -b -m command -a "chage -M 60 -m 7 -W 10 $user"
   done
-<img width="355" height="60" alt="Screenshot from 2025-09-16 16-30-39" src="https://github.com/user-attachments/assets/57e7d106-2752-4881-b19f-7998cebd70ed" />
+
+<img width="1366" height="768" alt="passwd expiry" src="https://github.com/user-attachments/assets/852ccebd-52d0-40e5-9be2-93dadf64d6f2" />
 
 ## Setting up sudo access for DevOps and Admin groups
     
@@ -66,6 +67,8 @@ final result on host-
   
   
   ansible dbservers -b -m copy -a "dest=/etc/sudoers.d/admin-group content='%admin-group ALL=(ALL) NOPASSWD: ALL' mode=0440"
+  <img width="1115" height="416" alt="sudoers" src="https://github.com/user-attachments/assets/fa212cec-a770-4f14-9170-209b4f997eb5" />
+
 
 ## Creating team collaboration directories
   ansible dbservers -b -m file -a "path=/teams/dev-team state=directory mode=2775 group=dev-team"
