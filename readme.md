@@ -2,7 +2,7 @@
 # Ansible Assignment 1: User & Project Management System
 # Target Group: dbservers (Ubuntu)
 # ----------------------------------------------
-# some naming mofication needed. do not execute it
+
 
 
 ## creating groups - 
@@ -41,7 +41,11 @@
   
   # Admin Team
   ansible dbservers -b -m user -a "name=admin1 uid=2006 group=admin-group shell=/bin/sh"
+
+  
   ansible dbservers -b -m user -a "name=admin2 uid=2007 group=admin-group shell=/bin/sh"
+  
+  
   ansible dbservers -b -m user -a "name=admin3 uid=2008 group=admin-group shell=/bin/sh"
 
 ## Setting password expiry policies..."
@@ -52,19 +56,29 @@
 ## Setting up sudo access for DevOps and Admin groups
     
   ansible dbservers -b -m copy -a "dest=/etc/sudoers.d/devops-team content='%devops-team ALL=(ALL) NOPASSWD: ALL' mode=0440"
+  
+  
   ansible dbservers -b -m copy -a "dest=/etc/sudoers.d/admin-group content='%admin-group ALL=(ALL) NOPASSWD: ALL' mode=0440"
 
 ## Creating team collaboration directories
   ansible dbservers -b -m file -a "path=/teams/dev-team state=directory mode=2775 group=dev-team"
+  
+  
   ansible dbservers -b -m file -a "path=/teams/devops-team state=directory mode=2775 group=devops-team"
 
 ## Creating project-specific directories
   ansible dbservers -b -m file -a "path=/projects/WebApp state=directory owner=devuser1 group=dev-team mode=2770"
+  
+  
   ansible dbservers -b -m file -a "path=/projects/API state=directory owner=devops1 group=devops-team mode=2770"
+  
+  
   ansible dbservers -b -m file -a "path=/projects/Mobile state=directory owner=admin1 group=admin-group mode=2770"
 
 ## Creating shared and archive directories
   ansible dbservers -b -m file -a "path=/shared_resources state=directory mode=2777"
+  
+  
   ansible dbservers -b -m file -a "path=/archive state=directory mode=0555"
 
 ## Creating admin-only area
@@ -72,28 +86,58 @@
   ansible dbservers -b -m file -a "path=/admin_area state=directory owner=root group=admin-group mode=0770"
 ## Setting ACLs for user home directories (read-only for their teams)
   ansible dbservers -b -m acl -a "path=/home/devuser1 entity=dev-team etype=group permissions=r state=present"
+  
   ansible dbservers -b -m acl -a "path=/home/devuser2 entity=dev-team etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/devuser3 entity=dev-team etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/devops1 entity=devops-team etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/devops2 entity=devops-team etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/devops3 entity=devops-team etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/admin1 entity=admin-group etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/admin2 entity=admin-group etype=group permissions=r state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/home/admin3 entity=admin-group etype=group permissions=r state=present"
 
 ## Setting ACLs for team directories (read for other teams)
   ansible dbservers -b -m acl -a "path=/teams/dev-team entity=devops-team etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/teams/dev-team entity=admin-group etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/teams/devops-team entity=dev-team etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/teams/devops-team entity=admin-group etype=group permissions=rx state=present"
 
 ## Setting ACLs for project directories (cross-team read access)
   # WebApp
   ansible dbservers -b -m acl -a "path=/projects/WebApp entity=devops-team etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/projects/WebApp entity=admin-group etype=group permissions=rx state=present"
+  
   # API
   ansible dbservers -b -m acl -a "path=/projects/API entity=dev-team etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/projects/API entity=admin-group etype=group permissions=rx state=present"
+  
   # Mobile
+  
   ansible dbservers -b -m acl -a "path=/projects/Mobile entity=dev-team etype=group permissions=rx state=present"
+  
+  
   ansible dbservers -b -m acl -a "path=/projects/Mobile entity=devops-team etype=group permissions=rx state=present"
