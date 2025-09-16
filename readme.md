@@ -72,9 +72,12 @@ final result on host-
 
 ## Creating team collaboration directories
   ansible dbservers -b -m file -a "path=/teams/dev-team state=directory mode=2775 group=dev-team"
-  
+  <img width="1103" height="244" alt="teams" src="https://github.com/user-attachments/assets/bea1971f-f35d-4616-a75b-eb328e24980f" />
+
   
   ansible dbservers -b -m file -a "path=/teams/devops-team state=directory mode=2775 group=devops-team"
+  
+  <img width="1105" height="189" alt="teams (1)" src="https://github.com/user-attachments/assets/eb39057b-b84b-46ae-81c4-a7026c783a18" />
 
 ## Creating project-specific directories
   ansible dbservers -b -m file -a "path=/projects/WebApp state=directory owner=devuser1 group=dev-team mode=2770"
@@ -138,7 +141,9 @@ final result on host-
   
   
   ansible dbservers -b -m acl -a "path=/projects/WebApp entity=admin-group etype=group permissions=rx state=present"
-  
+
+  <img width="1141" height="273" alt="projects" src="https://github.com/user-attachments/assets/790f843d-53b2-43de-aa86-8c05dd7b8653" />
+
   # API
   ansible dbservers -b -m acl -a "path=/projects/API entity=dev-team etype=group permissions=rx state=present"
   
@@ -151,3 +156,13 @@ final result on host-
   
   
   ansible dbservers -b -m acl -a "path=/projects/Mobile entity=devops-team etype=group permissions=rx state=present"
+
+  ## final results
+  # Dir structure - for users
+  <img width="1046" height="228" alt="final dir" src="https://github.com/user-attachments/assets/f6107206-f96e-4377-94ba-9356a1a19ebb" />
+  # Dir Structure - projects, teams, archive and others
+  <img width="1040" height="138" alt="Screenshot from 2025-09-16 17-03-45" src="https://github.com/user-attachments/assets/e33260bb-cba5-4999-938d-0192ec5bb4cc" />
+
+  # All groups and teams
+  <img width="628" height="169" alt="Screenshot from 2025-09-16 16-31-28" src="https://github.com/user-attachments/assets/e384abf4-8f7f-42a4-b698-aaa8801e0492" />
+
