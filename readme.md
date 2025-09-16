@@ -18,6 +18,8 @@
   ansible dbservers -b -m group -a "name=admin-group state=present"
   <img width="761" height="221" alt="image" src="https://github.com/user-attachments/assets/39e36e5e-af69-428a-be4d-69ed3279f48d" />
 
+final result on host- 
+<img width="355" height="60" alt="Screenshot from 2025-09-16 16-30-39" src="https://github.com/user-attachments/assets/ddc1293f-bf5c-4896-a84a-12ceb4edc650" />
 
 
 ## Creating Users with custom UIDs and shells
@@ -52,6 +54,7 @@
   for user in devuser1 devuser2 devuser3 devops1 devops2 devops3 admin1 admin2 admin3; do
     ansible dbservers -b -m command -a "chage -M 60 -m 7 -W 10 $user"
   done
+<img width="355" height="60" alt="Screenshot from 2025-09-16 16-30-39" src="https://github.com/user-attachments/assets/57e7d106-2752-4881-b19f-7998cebd70ed" />
 
 ## Setting up sudo access for DevOps and Admin groups
     
